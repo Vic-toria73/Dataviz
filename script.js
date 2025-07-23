@@ -8,20 +8,19 @@ async function recupAPI(){
 */
 //recupAPI()
 
-let tableauDonnéesAvion = []
 
-async function postData(url = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token")
-{
+
+async function postData(url = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token") {
     const response = await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-        'client_id': 'viky-api-client',
-        'client_secret': 'sexdPDA7O6r450Le2bzzmdoLZRTgC9H9',
-        'grant_type': 'client_credentials'
-    })
+            'client_id': 'viky-api-client',
+            'client_secret': 'x0GRI9PcVkWDQFHBXaXpLbIjne0bwFqY',
+            'grant_type': 'client_credentials'
+        })
     })
     const data = await response.json()
     return (data.access_token)
@@ -29,13 +28,12 @@ async function postData(url = "https://auth.opensky-network.org/auth/realms/open
 
 console.log(postData())
 
-async function getData(url = "https://opensky-network.org/api/states/all")
-{
+async function getData(url = "https://opensky-network.org/api/states/all") {
     const token = await postData()
     const response = await fetch(url, {
         method: 'GET',
         headers: {
-            'Content-Type' : 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
     })
@@ -53,19 +51,41 @@ async function APIinfosVol(){
 */
 
 async function main() {
+    let tableauDonnéesAvion = []
     const data = await getData();
-    for (k in data.states){
+    for (k in data.states) {
         tableauDonnéesAvion.push({
-            'ICAO24' : data.states[k][0],
-            'reference' : data.states[k][1],
-            'longitude' : data.states[k][5],
-            'latitude' : data.states[k][6]
+            'ICAO24': data.states[k][0],
+            'reference': data.states[k][1],
+            'longitude': data.states[k][5],
+            'latitude': data.states[k][6]
         })
+
     }
-    console.log(tableauDonnéesAvion)
+    return (tableauDonnéesAvion)
 
     //const dataInfosVol = await APIinfosVol()
     //console.log(dataInfosVol)
 }
 
 main();
+
+async function planesCordinates() {
+   try { 
+        let tableauDonnéesAvion = main()
+        console.log(tableauDonnéesAvion[0].latitude)
+        for (let i = 0; i < tableauDonnéesAvion.length; i++) {
+            const longitudeFly = tableauDonnéesAvion[i].longitude;
+            const latitudeFly = tableauDonnéesAvion[i].latitude;
+            L.marker([latitudeFly, longitudeFly]).addTo(map);
+            console.log('OK')
+        }
+   
+
+
+planesCordinates();
+
+} catch (error) {
+        console.error(error);
+
+    }}
