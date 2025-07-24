@@ -1,91 +1,104 @@
-/*
-async function recupAPI(){
-    const res = await fetch ('')
-    const data = await res.json()
-    const response = data.states
-    console.log(response)
-}
-*/
-//recupAPI()
+import { airlines } from './airlines.js'
+import { postData, getData, recupAPI } from './dom.js'
 
 
+const inputToken = document.getElementById('input_token')
+const btnToken = document.getElementById('btn_token')
+const btnFree = document.getElementById('btn_free')
 
-async function postData(url = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token") {
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-            'client_id': 'viky-api-client',
-            'client_secret': 'x0GRI9PcVkWDQFHBXaXpLbIjne0bwFqY',
-            'grant_type': 'client_credentials'
-        })
+const divMap = document.getElementById('div_map')
+const divAccueil = document.getElementById('div_accueil')
+
+
+btnToken.addEventListener('click', async () => {
+    let secretCode = inputToken.value
+    const token = await postData(secretCode)
+    const data = await getData(token)
+    const planes = await donneeAvion(data)
+    await planesCordinates(planes)
+    inputToken.innerText = ''
+    divMap.style.visibility="visible"
+    divAccueil.style.display="none"
     })
-    const data = await response.json()
-    return (data.access_token)
-}
 
-console.log(postData())
 
-async function getData(url = "https://opensky-network.org/api/states/all") {
-    const token = await postData()
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    const data = await response.json()
+btnFree.addEventListener('click', async () => {
+    const data = await recupAPI()
     console.log(data)
-    return data
-}
+    const planes = await donneeAvion(data)
+    const planesData = await SearchAirline(planes)
+    console.log(planesData)
+    await planesCordinates(planesData)
+    divMap.style.visibility="visible"
+    divAccueil.style.display="none"
+})
 
-/*
-async function APIinfosVol(){
-    const response = await fetch ('https://api.aviationstack.com/v1/flights?access_key=c870189c76218103845bda49ec0b56a5')
-    const data = await response.json()
-    return data
-}
-*/
 
-async function main() {
-    let tableauDonnéesAvion = []
-    const data = await getData();
-    for (k in data.states) {
-        tableauDonnéesAvion.push({
-            'ICAO24': data.states[k][0],
-            'reference': data.states[k][1],
-            'longitude': data.states[k][5],
-            'latitude': data.states[k][6]
+async function donneeAvion(data){
+    let tableauDonneesAvion = []
+    for (let k in data){
+        tableauDonneesAvion.push({
+            'ICAO24' : data[k][0],
+            'reference' : data[k][1],
+            'Provenance' : data[k][2],
+            'longitude' : data[k][5],
+            'latitude' : data[k][6]
         })
-
     }
-    return (tableauDonnéesAvion)
-
-    //const dataInfosVol = await APIinfosVol()
-    //console.log(dataInfosVol)
+    return tableauDonneesAvion
 }
 
-main();
 
-async function planesCordinates() {
-   try { 
-        let tableauDonnéesAvion = main()
-        console.log(tableauDonnéesAvion[0].latitude)
-        for (let i = 0; i < tableauDonnéesAvion.length; i++) {
-            const longitudeFly = tableauDonnéesAvion[i].longitude;
-            const latitudeFly = tableauDonnéesAvion[i].latitude;
-            L.marker([latitudeFly, longitudeFly]).addTo(map);
-            console.log('OK')
+async function planesCordinates(tableauDonneesAvion) {
+    for (let i = 0; i < tableauDonneesAvion.length; i++) {
+        const { longitude, latitude, reference, airline } = tableauDonneesAvion[i];
+        if (longitude != null && latitude != null) {
+            const marker = L.marker([latitude, longitude]).addTo(map)
+                .bindPopup(`<b>${reference || 'Inconnu'}</b><br>${airline || ''}`);
+            currentMarkers.push(marker);
         }
-   
+    }
+}
 
 
-planesCordinates();
+async function SearchAirline(tableauDonneesAvion){
+    for (let k in tableauDonneesAvion) {
+        if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference!= ''){
+            if (airlines.hasOwnProperty(tableauDonneesAvion[k].reference.substring(0,3))){
+                 tableauDonneesAvion[k].airline = airlines[tableauDonneesAvion[k].reference.substring(0,3)].name;
+            }
+        }
+    }
+    return tableauDonneesAvion
+}
 
-} catch (error) {
-        console.error(error);
 
-    }}
+let currentMarkers = [];
+
+function clearMapMarkers() {
+    currentMarkers.forEach(marker => map.removeLayer(marker));
+    currentMarkers = [];
+}
+
+async function loadPlanesInMapView() {
+    const bounds = map.getBounds();
+    const lamin = bounds.getSouth();
+    const lamax = bounds.getNorth();
+    const lomin = bounds.getWest();
+    const lomax = bounds.getEast();
+
+    const url = `https://opensky-network.org/api/states/all?lamin=${lamin}&lomin=${lomin}&lamax=${lamax}&lomax=${lomax}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+    const planes = await donneeAvion(data.states);
+    const planesData = await SearchAirline(planes);
+    clearMapMarkers(); // on nettoie l’ancienne couche
+    await planesCordinates(planesData);
+
+}
+
+
+map.on('moveend', () => {
+    loadPlanesInMapView();
+});

@@ -7,17 +7,38 @@
     <link rel="stylesheet" href="style.css">
     <script src="leaflet/leaflet.js" defer></script>
     <script src="scriptDataVizMAP.js" defer></script>
-    <script src="script.js" defer></script>
+    <script type='module' src="script.js" defer></script>
     <title>Vol interactive</title>
 </head>
 <body>
-    <h1>La carte interactive des vols </h1>
-    <div id="map"></div>
+    <div id="div_accueil">
+        <h1>Afficher la carte interactive des vols :</h1>
 
-    <div id="inputCoordinates">
-        <input type="search" name="latitude" id="inputLat">
-        <input type="search" name="longitude" id="inputLon">
-        <button type="button" id="button">Entrée</button>
+        <div>
+            <h2>gratuitement, sans token (accès limité)</h2>
+            <button type="button" id="btn_free">Récupérer les données gratuitement</button>
+        </div>
+
+        <div>
+            <h2>Avec un token d'identification</h2>
+            <label for="input_token">
+                <input type="text" name="input_token" id="input_token" >
+            </label>
+            
+            <button type="button" id="btn_token">Valider le token</button>
+        </div>
     </div>
+    
+   <div id="div_map">
+        <h1>La carte interactive des vols </h1>
+        <div id="map"></div>
+
+        <div id="inputCoordinates">
+            <input type="search" name="latitude" id="inputLat">
+            <input type="search" name="longitude" id="inputLon">
+            <button type="button" id="button">Entrée</button>
+        </div>
+   </div> 
+   
 </body>
 </html>
