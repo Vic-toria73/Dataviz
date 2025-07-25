@@ -1,6 +1,18 @@
 #map{
     border: 1px solid black;
-    height: 600px;
+    height: 500px;
+}
+
+#div_map {
+    visibility: hidden;
+}
+
+#div_accueil {
+    display: block;
+}
+
+input {
+    width: 400px;
 }
 
 #div_map {
