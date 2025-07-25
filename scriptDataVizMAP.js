@@ -1,4 +1,4 @@
-// On déclare les coordonnées de ADA 
+// On déclare les coordonnées pour créer la map sur un point existant
 let lat = 45.74707;
 let lon = 4.84591;
 
@@ -15,24 +15,14 @@ L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", {
     attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'
 }).addTo(map);
 
-
-let marker = L.marker([lat, lon]).addTo(map);
-
 //on charge l'icone du marqueur
-/*let icone = L.icon({
-    iconUrl: "/leaflet/images/fly.png",
-    iconSize: [25, 41],
-    iconAnchor: [12.5, 41],
-    //popupAnchor: [0, -41]
+let icone = L.icon({
+    iconUrl: "/leaflet/images/plane.png",
+    iconSize: [25, 25],
+    iconAnchor: [12.5, 12.5],
+    popupAnchor: [0, -12.5]
 });
 
-let marker = L.marker([lat, lon], {
-    icon: icone
-}).addTo(map);
-
-let popup = `<div class="popup>
-<h2></h2>
-<p></p>
-</div>`;//rajouter les contenus des datas obtenu avec l'api opensky & cie
-
-marker.binPopup(popup);*/
+//let marker = L.marker([lat, lon], {
+//    icon: icone
+//})
