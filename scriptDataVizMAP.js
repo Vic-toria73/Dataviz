@@ -20,7 +20,8 @@ let icone = L.icon({
     iconUrl: "/leaflet/images/plane.png",
     iconSize: [25, 25],
     iconAnchor: [12.5, 12.5],
-    popupAnchor: [0, -12.5]
+    popupAnchor: [0, -12.5],
+    rotationAngle: 0
 });
 
 let marker = L.marker([lat, lon], {
