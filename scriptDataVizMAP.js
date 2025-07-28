@@ -23,6 +23,6 @@ let icone = L.icon({
     popupAnchor: [0, -12.5]
 });
 
-//let marker = L.marker([lat, lon], {
-//    icon: icone
-//})
+let marker = L.marker([lat, lon], {
+   icon: icone
+})
