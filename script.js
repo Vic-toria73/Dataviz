@@ -15,6 +15,7 @@ btnToken.addEventListener('click', async () => {
     const token = await postData(secretCode)
     const data = await getData(token)
     const planes = await donneeAvion(data)
+    console.log(planes)
     await planesCordinates(planes)
     inputToken.innerText = ''
     divMap.style.visibility = "visible"
@@ -24,11 +25,8 @@ btnToken.addEventListener('click', async () => {
 
 btnFree.addEventListener('click', async () => {
     const data = await recupAPI()
-    console.log(data)
     const planes = await donneeAvion(data)
-    const planesData = await SearchAirline(planes)
-    console.log(planesData)
-    await planesCordinates(planesData)
+    await planesCordinates(planes)
     divMap.style.visibility = "visible"
     divAccueil.style.display = "none"
 })
@@ -40,91 +38,95 @@ async function donneeAvion(data) {
         tableauDonneesAvion.push({
             'ICAO24': data[k][0],
             'reference': data[k][1],
-            'Provenance': data[k][2],
+            'provenance': data[k][2],
             'longitude': data[k][5],
             'latitude': data[k][6]
         })
     }
-    return (tableauDonnéesAvion)
-
-    //const dataInfosVol = await APIinfosVol()
-    //console.log(dataInfosVol)
+    for (let k in tableauDonneesAvion) {
+        const coucou = airlines[0].icao
+        if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference != '') {
+            for (let i = 0; i < airlines.length; i++){
+                if ((tableauDonneesAvion[k].reference.substring(0, 3)) == airlines[i].icao){
+                    console.log(airlines[i].icao)
+                    tableauDonneesAvion[k].airline = airlines[i].name
+                }
+            }
+            /*
+            } if (/^N\d/.test(tableauDonneesAvion[k].airline === true)){
+                tableauDonneesAvion[k].airline = 'Petit avion privé / tourisme'
+            } else {
+                tableauDonneesAvion[k].airline = `Compagnie / type d'avion non trouvé`
+            */
+            }  
+    }
+    return (tableauDonneesAvion)
 }
 
-main();
 
-async function planesCordinates() {
-    let tableauDonneesAvion = await main()
-    console.log(tableauDonneesAvion)
-    for (let i = 0; i < tableauDonneesAvion.length; i++) {
-        if (tableauDonneesAvion[i].longitude != null && tableauDonneesAvion[i].latitude != null) {
-            const longitudeFly = tableauDonneesAvion[i].longitude;
-            const latitudeFly = tableauDonneesAvion[i].latitude;
-            const aircraft = tableauDonneesAvion[i].ICAO24;
-            const flightnumber = tableauDonneesAvion[i].reference;
+async function planesCordinates(planes) {
+    console.log(planes)
+    for (let i = 0; i < planes.length; i++) {
+        if (planes[i].longitude != null && planes[i].latitude != null) {
+            const longitudeFly = planes[i].longitude
+            const latitudeFly = planes[i].latitude
+            const aircraft = planes[i].ICAO24
+            const flightnumber = planes[i].reference
+            let airline = ''
+            if (planes[i].airline == undefined){
+                airline = 'Compagnie aérienne non répertoriée'
+            } else {
+                airline = planes[i].airline   
+            }
+            const provenance = planes[i].provenance
             marker = L.marker(([latitudeFly, longitudeFly]), {
                 icon: icone
-            }).addTo(map);
-                .bindPopup(`<b>${reference || 'Inconnu'}</b><br>${airline || ''}`);
-                currentMarkers.push(marker);
+            }).addTo(map)
+            currentMarkers.push(marker)
             
-
             let popup = `<div class="popup">
                     <div>
                     <h2>Numéro d'appareil: ${aircraft}</h2>
-                    <p>Numéro de vol :${flightnumber}</p>
+                    <p>Numéro de vol : ${flightnumber}</p>
+                    <p>Airline : ${airline}</p>
+                    <p>Pays de provenance : ${provenance}</p>
+                    <p>Latitude : ${latitudeFly}</p>
+                    <p>Longitude : ${longitudeFly}</p>
+                    
+
                     </div>
-                    </div>`;
+                    </div>`
             marker.bindPopup(popup);
         }
     }
 }
 
 
-
-
-
-
-
-
-async function SearchAirline(tableauDonneesAvion) {
-    for (let k in tableauDonneesAvion) {
-        if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference != '') {
-            if (airlines.hasOwnProperty(tableauDonneesAvion[k].reference.substring(0, 3))) {
-                tableauDonneesAvion[k].airline = airlines[tableauDonneesAvion[k].reference.substring(0, 3)].name;
-            }
-        }
-    }
-    return tableauDonneesAvion
-}
-
-
-let currentMarkers = [];
+let currentMarkers = []
 
 function clearMapMarkers() {
-    currentMarkers.forEach(marker => map.removeLayer(marker));
-    currentMarkers = [];
+    currentMarkers.forEach(marker => map.removeLayer(marker))
+    currentMarkers = []
 }
 
 async function loadPlanesInMapView() {
-    const bounds = map.getBounds();
-    const lamin = bounds.getSouth();
-    const lamax = bounds.getNorth();
-    const lomin = bounds.getWest();
-    const lomax = bounds.getEast();
+    const bounds = map.getBounds()
+    const lamin = bounds.getSouth()
+    const lamax = bounds.getNorth()
+    const lomin = bounds.getWest()
+    const lomax = bounds.getEast()
 
-    const url = `https://opensky-network.org/api/states/all?lamin=${lamin}&lomin=${lomin}&lamax=${lamax}&lomax=${lomax}`;
+    const url = `https://opensky-network.org/api/states/all?lamin=${lamin}&lomin=${lomin}&lamax=${lamax}&lomax=${lomax}`
 
-    const response = await fetch(url);
-    const data = await response.json();
-    const planes = await donneeAvion(data.states);
-    const planesData = await SearchAirline(planes);
+    const response = await fetch(url)
+    const data = await response.json()
+    const planes = await donneeAvion(data.states)
     clearMapMarkers(); // on nettoie l’ancienne couche
-    await planesCordinates(planesData);
+    await planesCordinates(planes)
 
 }
 
 
 map.on('moveend', () => {
     loadPlanesInMapView();
-});
+})
