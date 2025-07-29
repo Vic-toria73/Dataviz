@@ -28,5 +28,27 @@ let icone = L.icon({
 });
 
 let marker = L.marker([lat, lon], {
-   icon: icone
+    icon: icone
 })
+
+async function searchCity() {
+    const city = document.getElementById('cityInput').value;
+    if (!city) return;
+
+    // Appel à l'API de géocodage Nominatim
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${city}`)
+        const data = await response.json()
+            if (data.length > 0) {
+                const lat = data[0].lat;
+                const lon = data[0].lon;
+
+                // Déplacement de la carte et ajout du marqueur
+                map.setView([lat, lon], 12);
+
+                if (marker) map.removeLayer(marker);
+
+                marker = L.marker([lat, lon]).addTo(map)
+            }
+        };
+
+

@@ -4,6 +4,7 @@ import { countries } from './country.js'
 
 
 
+
 const inputToken = document.getElementById('input_token')
 const btnToken = document.getElementById('btn_token')
 const btnFree = document.getElementById('btn_free')
@@ -11,9 +12,8 @@ const btnFree = document.getElementById('btn_free')
 const divMap = document.getElementById('div_map')
 const divAccueil = document.getElementById('div_accueil')
 
-const inputlat = document.getElementById('inputlat')
-const inputlon = document.getElementById('inputlon')
-const btnsearch = document.getElementById
+const cityInput = document.getElementById('cityInput')
+const btnSearch = document.getElementById('btnSearch')
 
 async function homePage(data) {
     const planes = await donneeAvion(data)
@@ -36,7 +36,9 @@ btnFree.addEventListener('click', async () => {
     homePage(data)
 })
 
-//btns
+btnSearch.addEventListener('click', async () => {
+    searchCity()
+})
 
 async function donneeAvion(data) {
     let tableauDonneesAvion = []
