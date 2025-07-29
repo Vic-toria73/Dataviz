@@ -2,36 +2,8 @@ import { airlines} from './airlines.js'
 import { postData, getData, recupAPI } from './dom.js'
 import { countries } from './country.js'
 
-const inputToken = document.getElementById('input_token')
-const btnToken = document.getElementById('btn_token')
-const btnFree = document.getElementById('btn_free')
-
-const divMap = document.getElementById('div_map')
-const divAccueil = document.getElementById('div_accueil')
-
 const cityInput = document.getElementById('cityInput')
 const btnSearch = document.getElementById('btnSearch')
-
-async function homePage(data) {
-    const planes = await donneeAvion(data)
-    planesCordinates(planes)
-    divMap.style.visibility = "visible"
-    divAccueil.style.display = "none"
-    console.log(planes)
-}
-
-btnToken.addEventListener('click', async () => {
-    let secretCode = inputToken.value
-    const token = await postData(secretCode)
-    const data = await getData(token)
-    homePage(data)
-})
-
-
-btnFree.addEventListener('click', async () => {
-    const data = await recupAPI()
-    homePage(data)
-})
 
 btnSearch.addEventListener('click', async () => {
     searchCity()
