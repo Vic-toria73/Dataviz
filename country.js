@@ -1740,7 +1740,7 @@ export const countries = [
     "flag_1x1": "flags/1x1/ru.svg",
     "flag_4x3": "flags/4x3/ru.svg",
     "iso": true,
-    "name": "Russia"
+    "name": "Russian Federation"
   },
   {
     "capital": "Kigali",
@@ -1992,7 +1992,7 @@ export const countries = [
     "flag_1x1": "flags/1x1/kr.svg",
     "flag_4x3": "flags/4x3/kr.svg",
     "iso": true,
-    "name": "South Korea"
+    "name": "Republic of Korea"
   },
   {
     "capital": "Juba",
@@ -2217,7 +2217,7 @@ export const countries = [
     "flag_1x1": "flags/1x1/tr.svg",
     "flag_4x3": "flags/4x3/tr.svg",
     "iso": true,
-    "name": "Türkiye"
+    "name": "Turkey"
   },
   {
     "capital": "Kampala",
@@ -2278,7 +2278,7 @@ export const countries = [
     "flag_1x1": "flags/1x1/us.svg",
     "flag_4x3": "flags/4x3/us.svg",
     "iso": true,
-    "name": "United States of America"
+    "name": "United States"
   },
   {
     "code": "xx",
@@ -2330,7 +2330,7 @@ export const countries = [
     "flag_1x1": "flags/1x1/vn.svg",
     "flag_4x3": "flags/4x3/vn.svg",
     "iso": true,
-    "name": "Vietnam"
+    "name": "Viet Nam"
   },
   {
     "capital": "Road Town",

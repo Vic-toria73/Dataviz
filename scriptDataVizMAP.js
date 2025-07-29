@@ -15,23 +15,11 @@ L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", {
     attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>'
 }).addTo(map);
 
-let marker_ = L.marker([lat, lon], {
-}).addTo(map);
-
-//on charge l'icone du marqueur
-let icone = L.icon({
-    iconUrl: "/leaflet/images/plane.png",
-    iconSize: [25, 25],
-    iconAnchor: [12.5, 12.5],
-    popupAnchor: [0, -12.5],
-    rotationAngle: 0
-});
-
-let marker = L.marker([lat, lon], {
-    icon: icone
-})
 
 async function searchCity() {
+    let marker = L.marker([lat, lon], {
+    icon: icone
+    })
     const city = document.getElementById('cityInput').value;
     if (!city) return;
 
@@ -51,4 +39,4 @@ async function searchCity() {
             }
         };
 
-
+export {searchCity, map}

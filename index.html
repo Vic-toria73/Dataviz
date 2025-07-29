@@ -17,10 +17,11 @@
     <script src="splitFlat.js" defer></script>
     <script src="leaflet/leaflet.js" defer></script>
     <script src="leaflet/leaflet.rotatedMarker.js" defer></script>
-    <script src="scriptDataVizMAP.js" defer></script>
-    <script type="module" src="country.js" defer></script>
+    <script type="module" src="scriptDataVizMAP.js" defer></script>
     <script type='module' src="script.js" defer></script>
     <script type='module' src="main.js" defer></script>
+
+
     <title>Vol interactive</title>
 </head>
 
@@ -48,7 +49,7 @@
 
         </div>
 
-        <div class="cloud"></div>
+
 
     </div>
 
@@ -65,14 +66,13 @@
     <div id="div_map">
         <div id="titre_map">La carte interactive des vols </div>
         <div id="map"></div>
+        <div id="search-container">
+            <input type="text" id="cityInput" placeholder="Entrez une ville" />
+            <button type="button" id="btnSearch">Chercher</button>
+        </div>
     </div>
 
-
-        <div id="search-container">
-    <input type="text" id="cityInput" placeholder="Entrez une ville" />
-    <button type="button" id="btnSearch">Chercher</button>
-
-</div>
+    <div class="cloud"></div>
 </body>
 
 </html>

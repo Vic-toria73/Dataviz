@@ -1,13 +1,6 @@
 import { airlines} from './airlines.js'
-import { postData, getData, recupAPI } from './dom.js'
 import { countries } from './country.js'
-
-const cityInput = document.getElementById('cityInput')
-const btnSearch = document.getElementById('btnSearch')
-
-btnSearch.addEventListener('click', async () => {
-    searchCity()
-})
+import { map } from './scriptDataVizMAP.js'
 
 async function donneeAvion(data) {
     let tableauDonneesAvion = []
@@ -59,7 +52,17 @@ function planesCordinates(planes) {
                     
                 }
             }
-            marker = L.marker(([latitudeFly, longitudeFly]), {
+            //on charge l'icone du marqueur
+            let icone = L.icon({
+                iconUrl: "/leaflet/images/plane.png",
+                iconSize: [25, 25],
+                iconAnchor: [12.5, 12.5],
+                popupAnchor: [0, -12.5],
+                rotationAngle: 0
+            });
+            
+
+            let marker = L.marker(([latitudeFly, longitudeFly]), {
                 icon: icone,
                 rotationAngle: track
             }).addTo(map)
@@ -115,5 +118,6 @@ async function loadPlanesInMapView() {
 map.on('moveend', () => {
     loadPlanesInMapView()
 })
+    
 
 export {donneeAvion, planesCordinates}

@@ -12,25 +12,29 @@
 }
 
 #div_accueil {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .cloud {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 450px;
-    background-image: url(nuage.png);
-    background-size: cover;
-    background-repeat: repeat-x;
-    filter: brightness(180%);
-    background-color: #abc4e7;
+  display:flex;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 450px;
+  background-image: url(nuage.png);
+  background-size: cover;
+  background-repeat: repeat-x;
+  filter: brightness(180%);
+  z-index: 1000; /* 👈 force au-dessus des autres */
+}
+
+.popup {
+  background-color: bisque;
 }
 
 h1 {
@@ -144,6 +148,9 @@ input {
   }
 }
 
+body{
+  background-color: #abc4e7;
+}
 
 #img_plane {
   display: none;

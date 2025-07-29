@@ -1170,5 +1170,7 @@ export const airlines = {
   "WSW": "Swoop",
   "ROU": "Air Canada Rouge",
   "OYO": "Oyonnair",
-  "EJU": "EasyJet"
+  "EJU": "EasyJet",
+  "EZS": "EasyJet Switzerland",
+  "NAK": "Nok Air"
 }
