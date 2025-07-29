@@ -1,5 +1,7 @@
-import { airlines, country } from './airlines.js'
+import { airlines} from './airlines.js'
 import { postData, getData, recupAPI } from './dom.js'
+import { countries } from './country.js'
+
 
 
 const inputToken = document.getElementById('input_token')
@@ -8,6 +10,10 @@ const btnFree = document.getElementById('btn_free')
 
 const divMap = document.getElementById('div_map')
 const divAccueil = document.getElementById('div_accueil')
+
+const inputlat = document.getElementById('inputlat')
+const inputlon = document.getElementById('inputlon')
+const btnsearch = document.getElementById
 
 async function homePage(data) {
     const planes = await donneeAvion(data)
@@ -30,7 +36,7 @@ btnFree.addEventListener('click', async () => {
     homePage(data)
 })
 
-
+//btns
 
 async function donneeAvion(data) {
     let tableauDonneesAvion = []
@@ -49,7 +55,6 @@ async function donneeAvion(data) {
         if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference != '') {
             for (let i = 0; i < airlines.length; i++) {
                 if ((tableauDonneesAvion[k].reference.substring(0, 3)) == airlines[i].icao) {
-                    // console.log(airlines[i].icao)
                     tableauDonneesAvion[k].airline = airlines[i].name
                 }
             }
@@ -65,7 +70,6 @@ async function donneeAvion(data) {
 }
 
 async function planesCordinates(planes) {
-    //    console.log(planes)
     for (let i = 0; i < planes.length; i++) {
         if (planes[i].longitude != null && planes[i].latitude != null) {
             const longitudeFly = planes[i].longitude
@@ -80,30 +84,29 @@ async function planesCordinates(planes) {
                 airline = planes[i].airline
             }
             const provenance = planes[i].provenance
-            let nameCountry = '' 
-            for (let j = 0; j < country.length; j++) {
-                if (country[j].name == provenance) {
-                   nameCountry = country[j].flag_4x3 
+            let nameCountry = ''
+            for (let j = 0; j < countries.length; j++) {
+                if (countries[j].name == provenance) {
+                    nameCountry = countries[j].flag_4x3
+                    
                 }
             }
             marker = L.marker(([latitudeFly, longitudeFly]), {
                 icon: icone,
                 rotationAngle: track
-
             }).addTo(map)
 
 
             currentMarkers.push(marker)
 
-            let popup = 
-
+            let popup =
 
                 `<div class="popup">
                     <div>
                     <h2>Numéro d'appareil: ${aircraft}</h2>
                     <p>Numéro de vol : ${flightnumber}</p>
                     <p>Airline : ${airline}</p>
-                    <p>Pays de provenance : ${provenance} + ${nameCountry}</p>
+                    <p>Pays de provenance : ${provenance} <img width="15" height="15" src="${nameCountry}"></p>
                     <p>Latitude : ${latitudeFly}</p>
                     <p>Longitude : ${longitudeFly}</p>
                     

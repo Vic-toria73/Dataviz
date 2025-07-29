@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="leaflet/leaflet.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Mr+Dafoe&family=Puppies+Play&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css">
+    <link rel="stylesheet" href="css/flag-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
 
     <script src="leaflet/leaflet.js" defer></script>
-    <script src="leaflet/leaflet.rotatedMarker.js"defer></script>
+    <script src="leaflet/leaflet.rotatedMarker.js" defer></script>
     <script src="scriptDataVizMAP.js" defer></script>
+    <script type="module" src="country.js" defer></script>
     <script type='module' src="script.js" defer></script>
     <title>Vol interactive</title>
 </head>
+
 <body>
     <div id="div_accueil">
         <h1>Afficher la carte interactive des vols :</h1>
 
         <div>
-            <h2>gratuitement, sans token (accès limité)</h2>
+            <h2>Gratuitement, sans token (accès limité)</h2>
             <button type="button" id="btn_free">Récupérer les données gratuitement</button>
         </div>
 
         <div>
             <h2>Avec un token d'identification</h2>
             <label for="input_token">
-                <input type="text" name="input_token" id="input_token" >
+                <input type="text" name="input_token" id="input_token">
             </label>
-            
+
             <button type="button" id="btn_token">Valider le token</button>
         </div>
     </div>
-    
-   <div id="div_map">
+
+    <div id="div_map">
         <h1>La carte interactive des vols </h1>
         <div id="map"></div>
 
 
-    <!-- <div id="inputCoordinates">
+        <div id="inputCoordinates">
+            <p>Indiques tes coordonnées gps :</p>
         <input type="search" name="latitude" id="inputLat">
         <input type="search" name="longitude" id="inputLon">
-        <button type="button" id="button">Entrée</button>
-    </div> -->
+        <button type="button" id="btnsearch">Entrée</button>
+    </div>
 </body>
+
 </html>
