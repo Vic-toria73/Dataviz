@@ -2,9 +2,6 @@ import { airlines} from './airlines.js'
 import { postData, getData, recupAPI } from './dom.js'
 import { countries } from './country.js'
 
-
-
-
 const inputToken = document.getElementById('input_token')
 const btnToken = document.getElementById('btn_token')
 const btnFree = document.getElementById('btn_free')
@@ -17,7 +14,7 @@ const btnSearch = document.getElementById('btnSearch')
 
 async function homePage(data) {
     const planes = await donneeAvion(data)
-    await planesCordinates(planes)
+    planesCordinates(planes)
     divMap.style.visibility = "visible"
     divAccueil.style.display = "none"
     console.log(planes)
@@ -53,13 +50,9 @@ async function donneeAvion(data) {
         })
     }
     for (let k in tableauDonneesAvion) {
-        const coucou = airlines[0].icao
         if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference != '') {
-            for (let i = 0; i < airlines.length; i++) {
-                if ((tableauDonneesAvion[k].reference.substring(0, 3)) == airlines[i].icao) {
-                    tableauDonneesAvion[k].airline = airlines[i].name
-                }
-            }
+            const icaoCode = tableauDonneesAvion[k].reference.substring(0, 3)
+                tableauDonneesAvion[k].airline = airlines[icaoCode]
             /*
             } if (/^N\d/.test(tableauDonneesAvion[k].airline === true)){
                 tableauDonneesAvion[k].airline = 'Petit avion privé / tourisme'
@@ -71,7 +64,8 @@ async function donneeAvion(data) {
     return (tableauDonneesAvion)
 }
 
-async function planesCordinates(planes) {
+
+function planesCordinates(planes) {
     for (let i = 0; i < planes.length; i++) {
         if (planes[i].longitude != null && planes[i].latitude != null) {
             const longitudeFly = planes[i].longitude
@@ -105,7 +99,7 @@ async function planesCordinates(planes) {
 
                 `<div class="popup">
                     <div>
-                    <h2>Numéro d'appareil: ${aircraft}</h2>
+                    <h3>Numéro d'appareil: ${aircraft}</h3>
                     <p>Numéro de vol : ${flightnumber}</p>
                     <p>Airline : ${airline}</p>
                     <p>Pays de provenance : ${provenance} <img width="15" height="15" src="${nameCountry}"></p>
@@ -140,12 +134,14 @@ async function loadPlanesInMapView() {
     const response = await fetch(url)
     const data = await response.json()
     const planes = await donneeAvion(data.states)
-    clearMapMarkers(); // on nettoie l’ancienne couche
-    await planesCordinates(planes)
+    clearMapMarkers()
+    planesCordinates(planes)
 
 }
 
 
 map.on('moveend', () => {
-    loadPlanesInMapView();
+    loadPlanesInMapView()
 })
+
+export {donneeAvion, planesCordinates}
