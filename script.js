@@ -1,44 +1,6 @@
 import { airlines} from './airlines.js'
-import { postData, getData, recupAPI } from './dom.js'
 import { countries } from './country.js'
-
-
-
-
-const inputToken = document.getElementById('input_token')
-const btnToken = document.getElementById('btn_token')
-const btnFree = document.getElementById('btn_free')
-
-const divMap = document.getElementById('div_map')
-const divAccueil = document.getElementById('div_accueil')
-
-const cityInput = document.getElementById('cityInput')
-const btnSearch = document.getElementById('btnSearch')
-
-async function homePage(data) {
-    const planes = await donneeAvion(data)
-    await planesCordinates(planes)
-    divMap.style.visibility = "visible"
-    divAccueil.style.display = "none"
-    console.log(planes)
-}
-
-btnToken.addEventListener('click', async () => {
-    let secretCode = inputToken.value
-    const token = await postData(secretCode)
-    const data = await getData(token)
-    homePage(data)
-})
-
-
-btnFree.addEventListener('click', async () => {
-    const data = await recupAPI()
-    homePage(data)
-})
-
-btnSearch.addEventListener('click', async () => {
-    searchCity()
-})
+import { map } from './scriptDataVizMAP.js'
 
 async function donneeAvion(data) {
     let tableauDonneesAvion = []
@@ -53,13 +15,9 @@ async function donneeAvion(data) {
         })
     }
     for (let k in tableauDonneesAvion) {
-        const coucou = airlines[0].icao
         if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference != '') {
-            for (let i = 0; i < airlines.length; i++) {
-                if ((tableauDonneesAvion[k].reference.substring(0, 3)) == airlines[i].icao) {
-                    tableauDonneesAvion[k].airline = airlines[i].name
-                }
-            }
+            const icaoCode = tableauDonneesAvion[k].reference.substring(0, 3)
+                tableauDonneesAvion[k].airline = airlines[icaoCode]
             /*
             } if (/^N\d/.test(tableauDonneesAvion[k].airline === true)){
                 tableauDonneesAvion[k].airline = 'Petit avion privé / tourisme'
@@ -71,7 +29,8 @@ async function donneeAvion(data) {
     return (tableauDonneesAvion)
 }
 
-async function planesCordinates(planes) {
+
+function planesCordinates(planes) {
     for (let i = 0; i < planes.length; i++) {
         if (planes[i].longitude != null && planes[i].latitude != null) {
             const longitudeFly = planes[i].longitude
@@ -93,7 +52,17 @@ async function planesCordinates(planes) {
                     
                 }
             }
-            marker = L.marker(([latitudeFly, longitudeFly]), {
+            //on charge l'icone du marqueur
+            let icone = L.icon({
+                iconUrl: "/leaflet/images/plane.png",
+                iconSize: [25, 25],
+                iconAnchor: [12.5, 12.5],
+                popupAnchor: [0, -12.5],
+                rotationAngle: 0
+            });
+            
+
+            let marker = L.marker(([latitudeFly, longitudeFly]), {
                 icon: icone,
                 rotationAngle: track
             }).addTo(map)
@@ -105,7 +74,7 @@ async function planesCordinates(planes) {
 
                 `<div class="popup">
                     <div>
-                    <h2>Numéro d'appareil: ${aircraft}</h2>
+                    <h3>Numéro d'appareil: ${aircraft}</h3>
                     <p>Numéro de vol : ${flightnumber}</p>
                     <p>Airline : ${airline}</p>
                     <p>Pays de provenance : ${provenance} <img width="15" height="15" src="${nameCountry}"></p>
@@ -140,12 +109,15 @@ async function loadPlanesInMapView() {
     const response = await fetch(url)
     const data = await response.json()
     const planes = await donneeAvion(data.states)
-    clearMapMarkers(); // on nettoie l’ancienne couche
-    await planesCordinates(planes)
+    clearMapMarkers()
+    planesCordinates(planes)
 
 }
 
 
 map.on('moveend', () => {
-    loadPlanesInMapView();
+    loadPlanesInMapView()
 })
+    
+
+export {donneeAvion, planesCordinates}

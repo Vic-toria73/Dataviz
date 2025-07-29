@@ -8,27 +8,38 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css">
     <link rel="stylesheet" href="css/flag-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Mr+Dafoe&family=Puppies+Play&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-
+    <script src="splitFlat.js" defer></script>
     <script src="leaflet/leaflet.js" defer></script>
     <script src="leaflet/leaflet.rotatedMarker.js" defer></script>
-    <script src="scriptDataVizMAP.js" defer></script>
-    <script type="module" src="country.js" defer></script>
+    <script type="module" src="scriptDataVizMAP.js" defer></script>
     <script type='module' src="script.js" defer></script>
+    <script type='module' src="main.js" defer></script>
+
+
     <title>Vol interactive</title>
 </head>
 
 <body>
     <div id="div_accueil">
-        <h1>Afficher la carte interactive des vols :</h1>
 
-        <div>
+        <img id="plane1" src="plane.svg">
+
+        <div class="center"></div>
+
+        <img id="plane2" src="plane.svg">
+
+        <div id="container_free">
             <h2>Gratuitement, sans token (accès limité)</h2>
             <button type="button" id="btn_free">Récupérer les données gratuitement</button>
         </div>
 
-        <div>
+        <div id="container_token">
             <h2>Avec un token d'identification</h2>
             <label for="input_token">
                 <input type="text" name="input_token" id="input_token">
@@ -38,19 +49,30 @@
 
         </div>
 
-        <div class="cloud"></div>
+
 
     </div>
+
+    <div id="img_plane">
+        <h3 id="titre_chargement">Chargement de la carte...</h3>
+        <img class="clouds cloud1" src="nuage5.svg">
+        <img class="clouds cloud4 ghost" src="nuage5.svg">
+        <img class="clouds cloud2" src="nuage5.svg">
+        <img class="clouds cloud4" src="nuage5.svg">
+        <img id="plane" src="plane.svg">
+
+    </div>
+
     <div id="div_map">
-        <h1>La carte interactive des vols </h1>
+        <div id="titre_map">La carte interactive des vols </div>
         <div id="map"></div>
-
-
         <div id="search-container">
-    <input type="text" id="cityInput" placeholder="Entrez une ville" />
-    <button type="button" id="btnSearch">Chercher</button>
+            <input type="text" id="cityInput" placeholder="Entrez une ville" />
+            <button type="button" id="btnSearch">Chercher</button>
+        </div>
+    </div>
 
-</div>
+    <div class="cloud"></div>
 </body>
 
 </html>
