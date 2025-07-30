@@ -18,7 +18,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", {
 
 async function searchCity() {
     let marker = L.marker([lat, lon], {
-    icon: icone
     })
     const city = document.getElementById('cityInput').value;
     if (!city) return;

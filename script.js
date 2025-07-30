@@ -1,4 +1,4 @@
-import { airlines} from './airlines.js'
+import { airlines } from './airlines.js'
 import { countries } from './country.js'
 import { map } from './scriptDataVizMAP.js'
 
@@ -17,7 +17,7 @@ async function donneeAvion(data) {
     for (let k in tableauDonneesAvion) {
         if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference != '') {
             const icaoCode = tableauDonneesAvion[k].reference.substring(0, 3)
-                tableauDonneesAvion[k].airline = airlines[icaoCode]
+            tableauDonneesAvion[k].airline = airlines[icaoCode]
             /*
             } if (/^N\d/.test(tableauDonneesAvion[k].airline === true)){
                 tableauDonneesAvion[k].airline = 'Petit avion privé / tourisme'
@@ -49,7 +49,6 @@ function planesCordinates(planes) {
             for (let j = 0; j < countries.length; j++) {
                 if (countries[j].name == provenance) {
                     nameCountry = countries[j].flag_4x3
-                    
                 }
             }
             //on charge l'icone du marqueur
@@ -60,7 +59,7 @@ function planesCordinates(planes) {
                 popupAnchor: [0, -12.5],
                 rotationAngle: 0
             });
-            
+
 
             let marker = L.marker(([latitudeFly, longitudeFly]), {
                 icon: icone,
@@ -118,6 +117,6 @@ async function loadPlanesInMapView() {
 map.on('moveend', () => {
     loadPlanesInMapView()
 })
-    
 
-export {donneeAvion, planesCordinates}
+
+export { donneeAvion, planesCordinates }
