@@ -1,14 +1,15 @@
 #map {
   border: 1px solid black;
   width: 100%;
-  height: 75vh; /* ou 100vh si plein écran */
+  height: 75vh;
+  /* ou 100vh si plein écran */
   max-height: 100%;
   min-height: 300px;
   box-sizing: border-box;
 }
 
 #div_map {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #div_accueil {
@@ -20,7 +21,7 @@
 }
 
 .cloud {
-  display:flex;
+  display: flex;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -30,18 +31,16 @@
   background-size: cover;
   background-repeat: repeat-x;
   filter: brightness(180%);
-  z-index: 1000; /* 👈 force au-dessus des autres */
+  z-index: 1000;
+  /* 👈 force au-dessus des autres */
 }
 
-.popup {
-  background-color: bisque;
-}
 
 h1 {
   color: #2c3f66;
   font-family: "Goldman", sans-serif;
   font-weight: 700;
-  font-size: clamp(20px, 4vw,70px);
+  font-size: clamp(20px, 4vw, 70px);
   font-style: normal;
   padding-top: 50px;
 }
@@ -57,7 +56,7 @@ h1 {
 h2 {
   color: #2c3f66;
   padding-top: 50px;
-  font-size: clamp(15px, 3.5vw,40px);
+  font-size: clamp(15px, 3.5vw, 40px);
 }
 
 #btn_free {
@@ -70,6 +69,8 @@ h2 {
 }
 
 input {
+  text-align: center;
+  font-family: "Goldman", sans-serif;
   width: 200px;
 }
 
@@ -91,13 +92,41 @@ input {
   color: #2c3f66;
 }
 
+#search-container {
+  color: #2c3f66;
+  padding-top: 50px;
+  font-size: clamp(10px, 3.5vw, 30px);
+}
+
+#btnSearch {
+  justify-content: center;
+  font-family: "Goldman", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(10px, 2vw, 20px);
+  color: #2c3f66;
+  width: 10%;
+  box-sizing: border-box;
+}
+
+#cityInput {
+  justify-content: center;
+  font-family: "Goldman", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(10px, 2vw, 20px);
+  width: 15%;
+  box-sizing: border-box;
+}
+
+
 #plane1 {
-    position: absolute;
-    top: 15px;
-    right: 450px;
-    width: 100px;
-    z-index: 1;
-    animation: avion-flotte-1 7s linear infinite;
+  position: absolute;
+  top: 15px;
+  right: 450px;
+  width: 100px;
+  z-index: 1;
+  animation: avion-flotte-1 7s linear infinite;
 }
 
 @keyframes avion-flotte-1 {
@@ -105,14 +134,17 @@ input {
     left: 0%;
     opacity: 0;
   }
+
   10% {
     left: 10%;
     opacity: 1;
   }
+
   90% {
-    left:70%;
+    left: 70%;
     opacity: 1;
   }
+
   100% {
     left: 100%;
     opacity: 0;
@@ -134,21 +166,24 @@ input {
     right: 0%;
     opacity: 0;
   }
+
   10% {
     righ: 10%;
     opacity: 1;
   }
+
   90% {
-    right:70%;
+    right: 70%;
     opacity: 1;
   }
+
   100% {
     right: 100%;
     opacity: 0;
   }
 }
 
-body{
+body {
   background-color: #abc4e7;
 }
 
@@ -159,7 +194,8 @@ body{
   align-items: center;
   position: relative;
   width: 100vw;
-  height: 60vh; /* ou 100vh si plein écran */
+  height: 60vh;
+  /* ou 100vh si plein écran */
   overflow: hidden;
 }
 
@@ -169,7 +205,8 @@ body{
 
 #plane {
   position: relative;
-  width: 8vw; /* taille responsive */
+  width: 8vw;
+  /* taille responsive */
   max-width: 100px;
   min-width: 50px;
   animation: avion-flotte 2s ease-in-out infinite;
@@ -177,8 +214,15 @@ body{
 }
 
 @keyframes avion-flotte {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-1vh); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-1vh);
+  }
 }
 
 .clouds {
@@ -194,7 +238,8 @@ body{
   width: 10vw;
   max-width: 100px;
   min-width: 50px;
-  animation-delay: -4s; /* commence au milieu du cycle */
+  animation-delay: -4s;
+  /* commence au milieu du cycle */
 }
 
 .cloud1 {
@@ -222,10 +267,23 @@ body{
 }
 
 @keyframes nuage-défile-gauche {
-  0%   { left: 110vw; opacity: 0; }
-  2%   { opacity: 1; }
-  98%  { opacity: 1; }
-  100% { left: -10vw; opacity: 0; }
+  0% {
+    left: 110vw;
+    opacity: 0;
+  }
+
+  2% {
+    opacity: 1;
+  }
+
+  98% {
+    opacity: 1;
+  }
+
+  100% {
+    left: -10vw;
+    opacity: 0;
+  }
 }
 
 .splitflap {
@@ -318,10 +376,12 @@ div {
     transform: rotateX(0deg);
     background-color: #2c3f66;
   }
+
   50% {
     transform: rotateX(90deg);
     background-color: black;
   }
+
   100% {
     transform: rotateX(90deg);
   }
@@ -331,9 +391,11 @@ div {
   0% {
     transform: rotateX(-90deg);
   }
+
   50% {
     transform: rotateX(-90deg);
   }
+
   100% {
     transform: rotateX(0deg);
     background-color: #2c3f66;
@@ -349,7 +411,7 @@ div {
   color: #2c3f66;
   font-family: "Goldman", sans-serif;
   font-weight: 700;
-  font-size: clamp(40px, 4vw,70px);
+  font-size: clamp(40px, 4vw, 70px);
   font-style: normal;
   padding-top: 30px;
   padding-bottom: 20px;

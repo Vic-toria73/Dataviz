@@ -48,6 +48,7 @@
 .leaflet-container .leaflet-overlay-pane svg {
 	max-width: none !important;
 	max-height: none !important;
+	background: antiquewhite;
 	}
 .leaflet-container .leaflet-marker-pane img,
 .leaflet-container .leaflet-shadow-pane img,
@@ -520,7 +521,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	}
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-	background: white;
+	font-family: "Goldman", sans-serif;
+	background: #abc4e7;
 	color: #333;
 	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
 	}
