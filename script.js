@@ -1,4 +1,5 @@
 import { airlines } from './airlines.js'
+
 import { countries } from './country.js'
 import { map } from './scriptDataVizMAP.js'
 
@@ -17,17 +18,19 @@ async function donneeAvion(data) {
     for (let k in tableauDonneesAvion) {
         if (tableauDonneesAvion[k].reference != null && tableauDonneesAvion[k].reference != '') {
             const icaoCode = tableauDonneesAvion[k].reference.substring(0, 3)
-            tableauDonneesAvion[k].airline = airlines[icaoCode]
-            /*
-            } if (/^N\d/.test(tableauDonneesAvion[k].airline === true)){
-                tableauDonneesAvion[k].airline = 'Petit avion privé / tourisme'
-            } else {
-                tableauDonneesAvion[k].airline = `Compagnie / type d'avion non trouvé`
-            */
+                tableauDonneesAvion[k].airline = airlines[icaoCode]
+
+        } else if (/^[A-Za-z]{5}$/.test(tableauDonneesAvion[k].reference) || (/^N[0-9][A-Za-z0-9]{4}$/.test(tableauDonneesAvion[k].reference))) {
+            tableauDonneesAvion[k].airline = 'Petit avion privé / tourisme'
+
+        } else {
+            tableauDonneesAvion[k].airline = `Compagnie / type d'avion non trouvé`
         }
-    }
+        }
+    
     return (tableauDonneesAvion)
 }
+
 
 
 function planesCordinates(planes) {
@@ -59,6 +62,7 @@ function planesCordinates(planes) {
                 popupAnchor: [0, -12.5],
                 rotationAngle: 0
             });
+
 
 
             let marker = L.marker(([latitudeFly, longitudeFly]), {
@@ -119,4 +123,6 @@ map.on('moveend', () => {
 })
 
 
+
+export { donneeAvion, planesCordinates }
 export { donneeAvion, planesCordinates }

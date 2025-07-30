@@ -17,13 +17,15 @@ btnFree.addEventListener('click', async () => {
 
     const data = await recupAPI()
     const planes = await donneeAvion(data)
+    console.log(planes)
+
     planesCordinates(planes)
     setTimeout(() => {
         cloud.style.display = 'none'
         imgPlane.style.display = "none"
         divMap.style.visibility = "visible"
         
-    }, 5000);
+    }, 8000);
 
 })
 
@@ -35,18 +37,19 @@ btnToken.addEventListener('click', async () => {
     let secretCode = inputToken.value
     const token = await postData(secretCode)
     const data = await getData(token)
+    const planes = await donneeAvion(data)
     planesCordinates(planes)
     setTimeout(() => {
+        cloud.style.display = 'none'
         imgPlane.style.display = "none"
         divMap.style.visibility = "visible"
-        map.invalidateSize();
     }, 10000);
     inputToken.innerText = ''
 })
 
 
 btnSearch.addEventListener('click', async () => {
-    searchCity()
+    await searchCity()
 })
 
 

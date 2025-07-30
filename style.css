@@ -201,6 +201,10 @@ body {
 
 #titre_chargement {
   padding-bottom: 60px;
+  color: #2c3f66;
+  font-family: "Goldman", sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 4vw,50px);
 }
 
 #plane {
