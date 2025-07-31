@@ -1172,5 +1172,12 @@ export const airlines = {
   "OYO": "Oyonnair",
   "EJU": "EasyJet",
   "EZS": "EasyJet Switzerland",
-  "NAK": "Nok Air"
+  "NAK": "Nok Air",
+  "LRQ": "Luxembourg Air Ambulance",
+  "SAMU": "Hélicopter du SAMU",
+  "FJO": "Flexjet Operations Malta",
+  "FSF": "Flight Safety Foundation",
+  "ELEC": "Electra Airways",
+  "NJE": "National Jet Express",
+  "ADN": "Aero-Dienst"
 }

@@ -1481,7 +1481,7 @@ export const countries = [
     "flag_1x1": "flags/1x1/nl.svg",
     "flag_4x3": "flags/4x3/nl.svg",
     "iso": true,
-    "name": "Netherlands"
+    "name": "Kingdom of the Netherlands"
   },
   {
     "capital": "Nouméa",
