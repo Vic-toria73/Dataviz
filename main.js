@@ -43,7 +43,7 @@ btnToken.addEventListener('click', async () => {
         cloud.style.display = 'none'
         imgPlane.style.display = "none"
         divMap.style.visibility = "visible"
-    }, 10000);
+    }, 8000);
     inputToken.innerText = ''
 })
 

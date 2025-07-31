@@ -1,7 +1,7 @@
 #map {
   border: 1px solid black;
-  width: 100%;
-  height: 75vh;
+  width: auto;
+  height: 70vh;
   /* ou 100vh si plein écran */
   max-height: 100%;
   min-height: 300px;
@@ -26,13 +26,12 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  height: 450px;
+  height: 150px;
   background-image: url(nuage.png);
   background-size: cover;
   background-repeat: repeat-x;
   filter: brightness(180%);
   z-index: 1000;
-  /* 👈 force au-dessus des autres */
 }
 
 
@@ -55,8 +54,8 @@ h1 {
 
 h2 {
   color: #2c3f66;
-  padding-top: 50px;
-  font-size: clamp(15px, 3.5vw, 40px);
+  padding-top: 35px;
+  font-size: clamp(20px, 2vw, 40px);
 }
 
 #btn_free {
@@ -66,6 +65,7 @@ h2 {
   font-style: normal;
   font-size: clamp(10px, 2vw, 20px);
   color: #2c3f66;
+  cursor: pointer;
 }
 
 input {
@@ -80,6 +80,7 @@ input {
   justify-content: center;
   align-items: center;
   margin: auto;
+  padding-top: -10px;
 }
 
 
@@ -90,12 +91,13 @@ input {
   font-style: normal;
   font-size: clamp(10px, 2vw, 20px);
   color: #2c3f66;
+  cursor: pointer;
 }
 
 #search-container {
   color: #2c3f66;
-  padding-top: 50px;
-  font-size: clamp(10px, 3.5vw, 30px);
+  padding-top: 8px;
+  font-size: clamp(10px, 3vw, 30px);
 }
 
 #btnSearch {
@@ -103,18 +105,19 @@ input {
   font-family: "Goldman", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: clamp(10px, 2vw, 20px);
+  font-size: clamp(8px, 1.5vw, 15px);
   color: #2c3f66;
   width: 10%;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 #cityInput {
   justify-content: center;
   font-family: "Goldman", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
-  font-size: clamp(10px, 2vw, 20px);
+  font-size: clamp(8px, 1.5vw, 15px);
   width: 15%;
   box-sizing: border-box;
 }
@@ -154,7 +157,7 @@ input {
 #plane2 {
   transform: scaleX(-1);
   position: absolute;
-  top: 180px;
+  top: 190px;
   right: 450px;
   width: 100px;
   z-index: 2;
@@ -292,11 +295,11 @@ body {
 
 .splitflap {
   position: relative;
-  min-width: 50px;
-  height: 50px;
-  margin: 6px;
-  line-height: 50px;
-  font-size: 50px;
+  min-width: 45px;
+  height: 45px;
+  margin: 5px;
+  line-height: 45px;
+  font-size: 45px;
   font-family: Monospace;
   text-align: center;
   color: white;
@@ -412,11 +415,13 @@ div {
   justify-content: center;
   align-items: center;
   margin: auto;
+  text-align: center;
+  text-wrap: wrap;
   color: #2c3f66;
   font-family: "Goldman", sans-serif;
   font-weight: 700;
-  font-size: clamp(40px, 4vw, 70px);
+  font-size: clamp(20px, 3.5vw, 80px);
   font-style: normal;
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 15px;
 }

@@ -1178,5 +1178,6 @@ export const airlines = {
   "FJO": "Flexjet Operations Malta",
   "FSF": "Flight Safety Foundation",
   "ELEC": "Electra Airways",
-  "NJE": "National Jet Express"
+  "NJE": "National Jet Express",
+  "ADN": "Aero-Dienst"
 }
