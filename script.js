@@ -61,7 +61,7 @@ async function donneeAvion(data) {
                 }
                 //on charge l'icone du marqueur
                 let icone = L.icon({
-                    iconUrl: "/Dataviz/assets/plane.png",
+                    iconUrl: "qiehrbfvcoqzbndvcpqz/plane.png",
                     iconSize: [25, 25],
                     iconAnchor: [12.5, 12.5],
                     popupAnchor: [0, -12.5],
