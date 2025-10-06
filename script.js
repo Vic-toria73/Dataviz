@@ -61,7 +61,7 @@ async function donneeAvion(data) {
                 }
                 //on charge l'icone du marqueur
                 let icone = L.icon({
-                    iconUrl: "./leaflet/images/plane.png",
+                    iconUrl: "./plane.png",
                     iconSize: [25, 25],
                     iconAnchor: [12.5, 12.5],
                     popupAnchor: [0, -12.5],
